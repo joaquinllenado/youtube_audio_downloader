@@ -1,0 +1,2 @@
+# This file ensures the downloads directory is tracked in git
+# Downloaded files are automatically cleaned up and should not be committed 
