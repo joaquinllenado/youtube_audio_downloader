@@ -1,9 +1,12 @@
 FROM python:3.11-slim
 
-# Install system dependencies
+# Install system dependencies including SSL certificates
 RUN apt-get update && apt-get install -y \
     ffmpeg \
-    && rm -rf /var/lib/apt/lists/*
+    ca-certificates \
+    curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && update-ca-certificates
 
 # Set working directory
 WORKDIR /app

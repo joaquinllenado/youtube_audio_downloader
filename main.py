@@ -57,13 +57,19 @@ def get_yt_dlp_command(video_url: str, output_template: str, attempt: int = 1):
         "-o", output_template,
         "--user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "--extractor-args", "youtube:player_client=android",
-        "--no-check-certificates",
+        # SSL and certificate fixes
+        "--no-check-certificate",
         "--prefer-insecure",
+        "--http-chunk-size", "10485760",  # 10MB chunks
+        # Browser-like headers
         "--add-header", "Accept-Language:en-US,en;q=0.9",
         "--add-header", "Accept-Encoding:gzip, deflate, br",
         "--add-header", "DNT:1",
         "--add-header", "Connection:keep-alive",
         "--add-header", "Upgrade-Insecure-Requests:1",
+        "--add-header", "Sec-Fetch-Dest:document",
+        "--add-header", "Sec-Fetch-Mode:navigate",
+        "--add-header", "Sec-Fetch-Site:none",
     ]
     
     # Add cookies if available
